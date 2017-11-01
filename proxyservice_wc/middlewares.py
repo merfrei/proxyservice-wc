@@ -3,7 +3,7 @@ import base64
 from itertools import cycle
 from urllib.parse import urlparse
 from scrapy import signals
-from rastrero.contrib.proxyservice import ProxyServiceAPI
+from proxyservice_wc.api import ProxyServiceAPI
 from twisted.internet.error import TimeoutError as ServerTimeoutError
 from twisted.internet.error import ConnectionRefusedError
 from twisted.internet.error import ConnectionDone

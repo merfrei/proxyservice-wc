@@ -32,7 +32,7 @@ class ProxyServiceMiddleware(object):
         self.crawler = crawler
 
         self._api_auth = self._get_api_auth_from_settings()
-        self._proxy_service_api = ProxyServiceAPI(**self.api_auth)
+        self._proxy_service_api = ProxyServiceAPI(**self._api_auth)
 
         self.use_proxies = set()
         self.proxy_list = {}
@@ -52,9 +52,9 @@ class ProxyServiceMiddleware(object):
     def _get_api_auth_from_settings(self):
         try:
             auth = {
-                'host': self.crawler.settings['PROXY_SERVICE_HOST'],
-                'user': self.crawler.settings['PROXY_SERVICE_USER'],
-                'password': self.crawler.settings['PROXY_SERVICE_PSWD'],
+                'host': self.crawler.settings.get('PROXY_SERVICE_HOST', ''),
+                'user': self.crawler.settings.get('PROXY_SERVICE_USER', ''),
+                'password': self.crawler.settings.get('PROXY_SERVICE_PSWD', ''),
             }
         except Exception as e:
             msg = ('You must set the API host, user and password'

@@ -17,7 +17,7 @@ def extract_auth_from_url(url):
     url_parts = urlparse(url)
     new_url = ('{}://{}'
                .format(url_parts.scheme,
-                       url_parts.host))
+                       url_parts.hostname))
     if url_parts.port is not None:
         new_url += ':{}'.format(url_parts.port)
     return (url_parts.username, url_parts.password, new_url)

@@ -1,6 +1,7 @@
 import time
 import requests
-from w3lib.url import urljoin_rfc, add_or_replace_parameter
+from urllib.parse import urljoin
+from w3lib.url import add_or_replace_parameter
 from requests.auth import HTTPBasicAuth
 
 
@@ -20,7 +21,7 @@ class ProxyServiceAPI(object):
         return requests.get(url, auth=self._api_auth)
 
     def target_exists(self, tid):
-        url = urljoin_rfc(self.host, 'targets/{}'.format(tid))
+        url = urljoin(self.host, 'targets/{}'.format(tid))
         r = self._request(url)
         return r.status_code == 200
 
@@ -30,7 +31,7 @@ class ProxyServiceAPI(object):
                        log=None):
         proxy_list = []
 
-        proxy_list_url = urljoin_rfc(self.host, 'proxy_list')
+        proxy_list_url = urljoin(self.host, 'proxy_list')
         proxy_list_url = add_or_replace_parameter(
             proxy_list_url, 'target_id', str(target_id))
         proxy_list_url = add_or_replace_parameter(
